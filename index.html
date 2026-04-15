@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>الصيدلية التطوعية | دواء لكل محتاج</title>
+    <!-- حذفت السطر الخطأ تاع الصورة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e6ff 100%);
+            color: #1a2a3a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #e8f4f8; }
+        ::-webkit-scrollbar-thumb { background: #2c7da0; border-radius: 10px; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ========== شريط التنقل للهاتف ========== */
+        .navbar {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #2c7da0;
+        }
+
+        .logo span {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2c7da0, #61a5c2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a2a3a;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #2c7da0;
+            border-bottom: 2px solid #2c7da0;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #2c7da0;
+        }
+
+        /* ========== قسم الترحيب ========== */
+        .hero {
+            background: linear-gradient(135deg, #1a2a3a 0%, #2c7da0 50%, #61a5c2 100%);
+            color: white;
+            padding: 100px 0 60px;
+            margin-top: 70px;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: #ffd166;
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: #ffd166;
+            color: #1a2a3a;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #2c7da0;
+        }
+
+        /* ========== الأدوية ========== */
+        .medicines {
+            padding: 50px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2c7da0, #61a5c2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .search-box {
+            max-width: 350px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2c7da0;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #2c7da0;
+        }
+
+        .medicines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .medicine-card {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(44,125,160,0.1);
+        }
+
+        .medicine-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(44,125,160,0.15);
+        }
+
+        .medicine-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            background: #e8f4f8;
+        }
+
+        .medicine-card h3 {
+            color: #2c7da0;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .medicine-card p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .medicine-quantity {
+            font-size: 0.8rem;
+            margin: 8px 0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .medicine-quantity.in-stock {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .medicine-quantity.low {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .medicine-expiry {
+            font-size: 0.75rem;
+            color: #e74c3c;
+            margin: 5px 0;
+        }
+
+        .prescription-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin: 8px 0;
+        }
+
+        .prescription-badge.required {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .prescription-badge.not-required {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, #2c7da0, #61a5c2);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.01);
+        }
+
+        /* ========== الإحصائيات ========== */
+        .stats {
+            background: linear-gradient(135deg, #2c7da0, #61a5c2);
+            color: white;
+            padding: 50px 0;
+        }
+
+        .stats .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-number {
+            font-size: 1.6rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-item span:last-child {
+            font-size: 0.8rem;
+        }
+
+        /* ========== الفوتر ========== */
+        .footer {
+            background: #1a2a3a;
+            color: #a0b4c8;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 0.85rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #a0b4c8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #ffd166;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2a3a4a;
+            font-size: 0.75rem;
+        }
+
+        /* ========== صفحات ========== */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ========== صفحة الطلب ========== */
+        .order-page {
+            padding: 110px 0 60px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .order-search-box {
+            max-width: 100%;
+            margin: 0 0 20px 0;
+            position: relative;
+        }
+
+        .order-search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2c7da0;
+        }
+
+        .order-search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .order-search-box input:focus {
+            outline: none;
+            border-color: #2c7da0;
+        }
+
+        .medicine-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .medicine-option {
+            background: #f0f7ff;
+            padding: 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .medicine-option:hover {
+            background: #2c7da0;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .medicine-option img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .medicine-option h4 {
+            font-size: 0.85rem;
+        }
+
+        .medicine-option small {
+            font-size: 0.7rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            grid-column: 1/-1;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #2c7da0;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c7da0;
+        }
+
+        /* ========== لوحة التحكم المخفية ========== */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 70px 15px 30px;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-container {
+            max-width: 95%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .close-admin {
+            float: left;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #e74c3c;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #f0f7ff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2c7da0, #61a5c2);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+        }
+
+        th, td {
+            padding: 8px 5px;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #2c7da0;
+            color: white;
+        }
+
+        .add-form {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 15px;
+        }
+
+        .add-form h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                gap: 12px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .hero h1 span {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            
+            .stats .container {
+                gap: 10px;
+            }
+            
+            .stat-number {
+                font-size: 1.3rem;
+            }
+            
+            .medicine-selector {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                max-height: 350px;
+            }
+            
+            table {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo" id="secretLogoBtn">
+                <!-- غيري "logo.jpg" إلى اسم ملف صورتك -->
+                <img src="photo_5980807441211395032_y.jpg" alt="logo" class="logo-img" id="logoImage">
+                <span>صيدلة التطوعية</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#" data-page="order" class="nav-link">طلب دواء</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="page active-page">
+        <header class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>معاً من أجل <span>صحة أفضل</span></h1>
+                    <p>نوفر الأدوية للمحتاجين مجاناً، مع متطوعين يوصلون الدواء لباب بيتك</p>
+                    <div class="hero-buttons">
+                        <a href="#" data-page="order" class="btn btn-primary"><i class="fas fa-pills"></i> اطلب دواء الآن</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="medicines">
+            <div class="container">
+                <h2 class="section-title">الأدوية المتاحة</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="ابحث عن دواء...">
+                </div>
+                <div class="medicines-grid" id="medicinesGrid"></div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stat-item"><i class="fas fa-pills"></i><span class="stat-number" id="totalMedicines">0</span><span>دواء متاح</span></div>
+                <div class="stat-item"><i class="fas fa-hand-holding-heart"></i><span class="stat-number" id="totalOrders">0</span><span>طلب تم توصيله</span></div>
+                <div class="stat-item"><i class="fas fa-users"></i><span class="stat-number" id="totalVolunteers">0</span><span>متطوع</span></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- صفحة طلب الدواء -->
+    <div id="order-page" class="page">
+        <div class="order-page">
+            <div class="container">
+                <div class="order-card">
+                    <h2 class="section-title" style="margin-bottom: 20px;"><i class="fas fa-shopping-cart"></i> طلب دواء</h2>
+                    <div id="orderStep1">
+                        <h3 style="text-align:center; margin-bottom:15px; font-size:1.1rem;">اختر الدواء الذي تريده:</h3>
+                        
+                        <div class="order-search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="orderSearchInput" placeholder="ابحث عن دواء...">
+                        </div>
+                        
+                        <div class="medicine-selector" id="medicineSelector"></div>
+                    </div>
+                    <div id="orderStep2" style="display:none;">
+                        <div style="background:#e8f4f8; padding:15px; border-radius:15px; margin-bottom:20px;">
+                            <h3 style="font-size:1rem;">الدواء المختار: <span id="selectedOrderMedicine"></span></h3>
+                        </div>
+                        <form id="orderForm">
+                            <div class="form-group"><label>الاسم الكامل *</label><input type="text" id="fullName" required placeholder="أدخل اسمك الثلاثي"></div>
+                            <div class="form-group"><label>رقم الهاتف *</label><input type="tel" id="phone" required placeholder="مثال: 0555123456"></div>
+                            <div class="form-group"><label>العنوان *</label><textarea id="address" required placeholder="الولاية - البلدية - الحي"></textarea></div>
+                            <div id="prescriptionSection" style="display:none;">
+                                <div style="border:2px dashed #2c7da0; padding:15px; border-radius:15px; text-align:center;">
+                                    <p style="margin-bottom:10px;">📋 هذا الدواء يحتاج وصفة طبية</p>
+                                    <input type="file" id="prescription" accept="image/*">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%; margin-top:20px;">إرسال الطلب</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم المخفية -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-container">
+            <div class="close-admin" id="closeAdminBtn">&times;</div>
+            <h2 style="color:#2c7da0; font-size:1.3rem;"><i class="fas fa-user-shield"></i> لوحة التحكم</h2>
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="admin-orders">📋 الطلبات</button>
+                <button class="tab-btn" data-tab="admin-medicines">💊 الأدوية</button>
+            </div>
+            <div id="admin-orders-tab" class="tab-content active">
+                <table style="width:100%">
+                    <thead><tr><th>رقم</th><th>المريض</th><th>الدواء</th><th>الحالة</th><th>تحديث</th></tr></thead>
+                    <tbody id="adminOrdersList"></tbody>
+                </table>
+            </div>
+            <div id="admin-medicines-tab" class="tab-content">
+                <table style="width:100%">
+                    <thead><tr><th>الصورة</th><th>الدواء</th><th>الكمية</th><th>الصلاحية</th><th>وصفة</th><th>حذف</th></tr></thead>
+                    <tbody id="adminMedicinesList"></tbody>
+                </table>
+                <div class="add-form">
+                    <h3>➕ إضافة دواء جديد</h3>
+                    <div class="form-group"><input type="text" id="newMedicineName" placeholder="اسم الدواء"></div>
+                    <div class="form-group"><input type="number" id="newMedicineQuantity" placeholder="الكمية"></div>
+                    <div class="form-group"><input type="date" id="newMedicineExpiry" placeholder="تاريخ الصلاحية"></div>
+                    <div class="form-group">
+                        <select id="newMedicinePrescription">
+                            <option value="0">لا يحتاج وصفة</option>
+                            <option value="1">يحتاج وصفة</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>رابط صورة الدواء</label>
+                        <input type="text" id="newMedicineImage" placeholder="https://example.com/medicine.jpg">
+                    </div>
+                    <button class="btn btn-primary" id="addMedicineBtn" style="width:100%;">إضافة الدواء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>صيدلية الأمل</h3>
+                    <p>مبادرة خيرية لتوفير الأدوية للمحتاجين مجاناً</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#" data-page="home" class="footer-link">الرئيسية</a></li>
+                        <li><a href="#" data-page="order" class="footer-link">طلب دواء</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <p><i class="fas fa-phone"></i> +213 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@pharmacy-vol.org</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 صيدلية الأمل - معاً نصنع الفرق</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== البيانات ==========
+        let medicines = [
+            { id: 1, name: "باراسيتامول 500mg", quantity: 25, requiresPrescription: false, expiry: "2026-12-31", image: "https://via.placeholder.com/150?text=Paracetamol", description: "مسكن للآلام وخافض للحرارة" },
+            { id: 2, name: "أموكسيسيلين 500mg", quantity: 12, requiresPrescription: true, expiry: "2025-10-15", image: "https://via.placeholder.com/150?text=Amoxicillin", description: "مضاد حيوي" },
+            { id: 3, name: "فيتامين د 50000", quantity: 8, requiresPrescription: false, expiry: "2027-01-20", image: "https://via.placeholder.com/150?text=VitaminD", description: "مكمل غذائي" },
+            { id: 4, name: "لوراتادين 10mg", quantity: 30, requiresPrescription: false, expiry: "2026-08-01", image: "https://via.placeholder.com/150?text=Loratadine", description: "مضاد للحساسية" },
+            { id: 5, name: "أوميبرازول 20mg", quantity: 5, requiresPrescription: true, expiry: "2025-05-30", image: "https://via.placeholder.com/150?text=Omeprazole", description: "علاج حرقة المعدة" },
+            { id: 6, name: "أسبرين 100mg", quantity: 15, requiresPrescription: false, expiry: "2026-11-11", image: "https://via.placeholder.com/150?text=Aspirin", description: "مضاد لتجلط الدم" }
+        ];
+
+        let orders = [
+            { id: 1, patient: "أحمد محمد", medicine: "باراسيتامول", status: "pending" },
+            { id: 2, patient: "فاطمة علي", medicine: "أموكسيسيلين", status: "approved" }
+        ];
+
+        let stats = { totalOrders: 342, totalVolunteers: 28 };
+        let selectedMedicineForOrder = null;
+        let secretClickCount = 0;
+        let secretTimeout = null;
+        let currentOrderFilter = "";
+
+        function displayMedicines(filter = "") {
+            const grid = document.getElementById("medicinesGrid");
+            if (!grid) return;
+            const filtered = medicines.filter(m => m.name.includes(filter) || m.description.includes(filter));
+            if (filtered.length === 0) { grid.innerHTML = `<div style="text-align:center;">لا توجد أدوية</div>`; return; }
+            grid.innerHTML = filtered.map(m => `
+                <div class="medicine-card">
+                    <img src="${m.image}" class="medicine-img" onerror="this.src='https://via.placeholder.com/150?text=Medicine'">
+                    <h3><i class="fas fa-capsules"></i> ${m.name}</h3>
+                    <p>${m.description}</p>
+                    <div class="medicine-quantity ${m.quantity < 10 ? 'low' : 'in-stock'}">الكمية: ${m.quantity}</div>
+                    <div class="medicine-expiry"><i class="fas fa-calendar-alt"></i> صلاحية: ${m.expiry}</div>
+                    <div class="prescription-badge ${m.requiresPrescription ? 'required' : 'not-required'}">${m.requiresPrescription ? '📋 يحتاج وصفة' : '✅ لا يحتاج وصفة'}</div>
+                    <button class="order-btn" onclick="startOrder(${m.id})"><i class="fas fa-shopping-cart"></i> طلب الدواء</button>
+                </div>
+            `).join('');
+        }
+
+        function displayOrderMedicines(filter = "") {
+            const selector = document.getElementById("medicineSelector");
+            if (!selector) return;
+            const filtered = medicines.filter(m => m.name.includes(filter) || m.description.includes(filter));
+            if (filtered.length === 0) {
+                selector.innerHTML = `<div class="no-results">🔍 لا توجد أدوية مطابقة للبحث</div>`;
+                return;
+            }
+            selector.innerHTML = filtered.map(m => `
+                <div class="medicine-option" onclick="selectMedicineForOrder(${m.id})">
+                    <img src="${m.image}" onerror="this.src='https://via.placeholder.com/50?text=Med'">
+                    <h4>${m.name}</h4>
+                    <small>الكمية: ${m.quantity}</small>
+                </div>
+            `).join('');
+        }
+
+        function startOrder(medicineId) {
+            const medicine = medicines.find(m => m.id === medicineId);
+            if (medicine) {
+                localStorage.setItem("orderMedicine", JSON.stringify(medicine));
+                showPage('order');
+                loadOrderSelection();
+            }
+        }
+
+        function loadOrderSelection() {
+            currentOrderFilter = "";
+            const searchInput = document.getElementById("orderSearchInput");
+            if (searchInput) searchInput.value = "";
+            displayOrderMedicines("");
+            const stored = localStorage.getItem("orderMedicine");
+            if (stored) {
+                const med = JSON.parse(stored);
+                selectMedicineForOrder(med.id);
+                localStorage.removeItem("orderMedicine");
+            }
+        }
+
+        function selectMedicineForOrder(id) {
+            selectedMedicineForOrder = medicines.find(m => m.id === id);
+            document.getElementById("selectedOrderMedicine").innerText = selectedMedicineForOrder.name;
+            document.getElementById("orderStep1").style.display = "none";
+            document.getElementById("orderStep2").style.display = "block";
+            const prescriptionSection = document.getElementById("prescriptionSection");
+            if (prescriptionSection) {
+                prescriptionSection.style.display = selectedMedicineForOrder.requiresPrescription ? "block" : "none";
+            }
+        }
+
+        function updateStats() {
+            const total = medicines.reduce((s, m) => s + m.quantity, 0);
+            document.getElementById("totalMedicines") && (document.getElementById("totalMedicines").textContent = total);
+            document.getElementById("totalOrders") && (document.getElementById("totalOrders").textContent = stats.totalOrders);
+            document.getElementById("totalVolunteers") && (document.getElementById("totalVolunteers").textContent = stats.totalVolunteers);
+        }
+
+        document.getElementById("secretLogoBtn")?.addEventListener("click", () => {
+            secretClickCount++;
+            if (secretTimeout) clearTimeout(secretTimeout);
+            secretTimeout = setTimeout(() => { secretClickCount = 0; }, 1000);
+            if (secretClickCount === 3) {
+                const password = prompt("🔐 أدخل كلمة السر للإداري:");
+                if (password === "admin123") {
+                    document.getElementById("adminPanel").classList.add("active");
+                    loadAdminData();
+                } else {
+                    alert("كلمة السر خاطئة!");
+                }
+                secretClickCount = 0;
+            }
+        });
+
+        document.getElementById("closeAdminBtn")?.addEventListener("click", () => {
+            document.getElementById("adminPanel").classList.remove("active");
+        });
+
+        function loadAdminData() {
+            const ordersTbody = document.getElementById("adminOrdersList");
+            if (ordersTbody) {
+                ordersTbody.innerHTML = orders.map(o => `
+                    <tr>
+                        <td>#${o.id}</td>
+                        <td>${o.patient}</td>
+                        <td>${o.medicine}</td>
+                        <td><span class="status-badge" style="background:#fff3cd; padding:3px 8px; border-radius:15px;">${o.status === 'pending' ? 'قيد المراجعة' : 'تمت الموافقة'}</span></td>
+                        <td><button onclick="updateOrderStatus(${o.id})" style="background:#2c7da0; color:white; border:none; padding:5px 10px; border-radius:15px;">تحديث</button></td>
+                    </tr>
+                `).join('');
+            }
+            const medTbody = document.getElementById("adminMedicinesList");
+            if (medTbody) {
+                medTbody.innerHTML = medicines.map(m => `
+                    <tr>
+                        <td><img src="${m.image}" style="width:35px; height:35px; border-radius:8px; object-fit:cover;"></td>
+                        <td>${m.name}</td>
+                        <td>${m.quantity}</td>
+                        <td>${m.expiry}</td>
+                        <td>${m.requiresPrescription ? 'نعم' : 'لا'}</td>
+                        <td><button onclick="deleteMedicineAdmin(${m.id})" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:15px;">حذف</button></td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function updateOrderStatus(id) {
+            const order = orders.find(o => o.id === id);
+            if (order) {
+                order.status = order.status === 'pending' ? 'approved' : 'pending';
+                loadAdminData();
+            }
+        }
+
+        function deleteMedicineAdmin(id) {
+            medicines = medicines.filter(m => m.id !== id);
+            displayMedicines();
+            displayOrderMedicines(currentOrderFilter);
+            loadAdminData();
+            updateStats();
+        }
+
+        function addMedicine() {
+            const name = document.getElementById("newMedicineName")?.value;
+            const quantity = parseInt(document.getElementById("newMedicineQuantity")?.value);
+            const expiry = document.getElementById("newMedicineExpiry")?.value;
+            const requiresPrescription = document.getElementById("newMedicinePrescription")?.value === "1";
+            const image = document.getElementById("newMedicineImage")?.value || "https://via.placeholder.com/150?text=Medicine";
+            if (name && quantity) {
+                const newId = Math.max(...medicines.map(m => m.id), 0) + 1;
+                medicines.push({ id: newId, name, quantity, expiry, requiresPrescription, image, description: "وصف الدواء" });
+                displayMedicines();
+                displayOrderMedicines(currentOrderFilter);
+                loadAdminData();
+                updateStats();
+                document.getElementById("newMedicineName").value = "";
+                document.getElementById("newMedicineQuantity").value = "";
+                document.getElementById("newMedicineExpiry").value = "";
+                document.getElementById("newMedicineImage").value = "";
+                alert("✅ تم إضافة الدواء بنجاح!");
+            } else {
+                alert("الرجاء إدخال اسم الدواء والكمية");
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.getElementById(`${pageId}-page`).classList.add('active-page');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll(`.nav-link[data-page="${pageId}"]`).forEach(l => l.classList.add('active'));
+            if (pageId === 'home') updateStats();
+            if (pageId === 'order') {
+                document.getElementById("orderStep1").style.display = "block";
+                document.getElementById("orderStep2").style.display = "none";
+                loadOrderSelection();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function setupOrderForm() {
+            const form = document.getElementById("orderForm");
+            if (form) {
+                form.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById("fullName")?.value;
+                    const phone = document.getElementById("phone")?.value;
+                    const address = document.getElementById("address")?.value;
+                    if (!name || !phone || !address) {
+                        alert("الرجاء ملء جميع الحقول");
+                        return;
+                    }
+                    const newOrder = { id: orders.length + 1, patient: name, medicine: selectedMedicineForOrder?.name, status: "pending" };
+                    orders.push(newOrder);
+                    if (selectedMedicineForOrder) {
+                        const med = medicines.find(m => m.id === selectedMedicineForOrder.id);
+                        if (med && med.quantity > 0) med.quantity--;
+                    }
+                    alert(`✅ تم قبول طلبك بنجاح! 🎉\n\nالدواء: ${selectedMedicineForOrder?.name}\nالاسم: ${name}\nسيتم التواصل معك قريباً`);
+                    form.reset();
+                    displayMedicines();
+                    displayOrderMedicines(currentOrderFilter);
+                    updateStats();
+                    showPage('home');
+                });
+            }
+        }
+
+        function setupSearch() {
+            document.getElementById("searchInput")?.addEventListener("input", e => displayMedicines(e.target.value));
+        }
+        
+        function setupOrderSearch() {
+            const orderSearch = document.getElementById("orderSearchInput");
+            if (orderSearch) {
+                orderSearch.addEventListener("input", (e) => {
+                    currentOrderFilter = e.target.value;
+                    displayOrderMedicines(currentOrderFilter);
+                });
+            }
+        }
+        
+        function setupMobileMenu() {
+            document.querySelector(".menu-toggle")?.addEventListener("click", () => {
+                document.querySelector(".nav-links")?.classList.toggle("active");
+            });
+        }
+        
+        function setupNavigation() {
+            document.querySelectorAll('[data-page]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = el.getAttribute('data-page');
+                    if (page) showPage(page);
+                });
+            });
+        }
+        
+        function setupAdminButtons() {
+            document.getElementById("addMedicineBtn")?.addEventListener("click", addMedicine);
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tab = btn.getAttribute('data-tab');
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(`${tab}-tab`).classList.add('active');
+                });
+            });
+        }
+
+        // ========== تغيير اللوقو - غيري "logo.jpg" إلى اسم صورتك ==========
+        function changeLogo() {
+            const logoImg = document.getElementById("logoImage");
+            if (logoImg) {
+                // ★★★ غيري "logo.jpg" إلى اسم ملف صورتك ★★★
+                // مثال: إذا اسم صورتك "my-logo.png" اكتبي "my-logo.png"
+                logoImg.src = "photo_5980807441211395032_y.jpg";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            displayMedicines();
+            updateStats();
+            setupSearch();
+            setupOrderSearch();
+            setupMobileMenu();
+            setupNavigation();
+            setupOrderForm();
+            setupAdminButtons();
+            changeLogo();
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
