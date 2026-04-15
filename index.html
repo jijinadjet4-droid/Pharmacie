@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>الصيدلية التطوعية | دواء لكل محتاج</title>
-    <!-- حذفت السطر الخطأ تاع الصورة -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -31,7 +30,6 @@
             padding: 0 15px;
         }
 
-        /* ========== شريط التنقل للهاتف ========== */
         .navbar {
             background: rgba(255,255,255,0.98);
             backdrop-filter: blur(10px);
@@ -100,7 +98,6 @@
             color: #2c7da0;
         }
 
-        /* ========== قسم الترحيب ========== */
         .hero {
             background: linear-gradient(135deg, #1a2a3a 0%, #2c7da0 50%, #61a5c2 100%);
             color: white;
@@ -163,18 +160,6 @@
             transform: scale(1.02);
         }
 
-        .btn-outline {
-            border: 2px solid white;
-            color: white;
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: #2c7da0;
-        }
-
-        /* ========== الأدوية ========== */
         .medicines {
             padding: 50px 0;
             background: white;
@@ -319,7 +304,6 @@
             transform: scale(1.01);
         }
 
-        /* ========== الإحصائيات ========== */
         .stats {
             background: linear-gradient(135deg, #2c7da0, #61a5c2);
             color: white;
@@ -348,7 +332,6 @@
             font-size: 0.8rem;
         }
 
-        /* ========== الفوتر ========== */
         .footer {
             background: #1a2a3a;
             color: #a0b4c8;
@@ -392,7 +375,6 @@
             font-size: 0.75rem;
         }
 
-        /* ========== صفحات ========== */
         .page {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -407,7 +389,6 @@
             to { opacity: 1; }
         }
 
-        /* ========== صفحة الطلب ========== */
         .order-page {
             padding: 110px 0 60px;
         }
@@ -508,7 +489,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 10px 12px;
             border: 2px solid #e2e8f0;
@@ -518,12 +500,13 @@
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #2c7da0;
         }
 
-        /* ========== لوحة التحكم المخفية ========== */
+        /* ========== لوحة التحكم ========== */
         .admin-panel {
             display: none;
             position: fixed;
@@ -615,6 +598,21 @@
             margin-bottom: 15px;
         }
 
+        /* معاينة الصورة */
+        .image-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid #2c7da0;
+            padding: 3px;
+        }
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -679,7 +677,6 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo" id="secretLogoBtn">
-                <!-- غيري "logo.jpg" إلى اسم ملف صورتك -->
                 <img src="photo_5980807441211395032_y.jpg" alt="logo" class="logo-img" id="logoImage">
                 <span>صيدلة التطوعية</span>
             </div>
@@ -735,12 +732,10 @@
                     <h2 class="section-title" style="margin-bottom: 20px;"><i class="fas fa-shopping-cart"></i> طلب دواء</h2>
                     <div id="orderStep1">
                         <h3 style="text-align:center; margin-bottom:15px; font-size:1.1rem;">اختر الدواء الذي تريده:</h3>
-                        
                         <div class="order-search-box">
                             <i class="fas fa-search"></i>
                             <input type="text" id="orderSearchInput" placeholder="ابحث عن دواء...">
                         </div>
-                        
                         <div class="medicine-selector" id="medicineSelector"></div>
                     </div>
                     <div id="orderStep2" style="display:none;">
@@ -787,20 +782,31 @@
                 </table>
                 <div class="add-form">
                     <h3>➕ إضافة دواء جديد</h3>
-                    <div class="form-group"><input type="text" id="newMedicineName" placeholder="اسم الدواء"></div>
-                    <div class="form-group"><input type="number" id="newMedicineQuantity" placeholder="الكمية"></div>
-                    <div class="form-group"><input type="date" id="newMedicineExpiry" placeholder="تاريخ الصلاحية"></div>
                     <div class="form-group">
+                        <label>اسم الدواء</label>
+                        <input type="text" id="newMedicineName" placeholder="اسم الدواء">
+                    </div>
+                    <div class="form-group">
+                        <label>الكمية</label>
+                        <input type="number" id="newMedicineQuantity" placeholder="الكمية">
+                    </div>
+                    <div class="form-group">
+                        <label>تاريخ الصلاحية</label>
+                        <input type="date" id="newMedicineExpiry">
+                    </div>
+                    <div class="form-group">
+                        <label>يحتاج وصفة طبية؟</label>
                         <select id="newMedicinePrescription">
                             <option value="0">لا يحتاج وصفة</option>
                             <option value="1">يحتاج وصفة</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>رابط صورة الدواء</label>
-                        <input type="text" id="newMedicineImage" placeholder="https://example.com/medicine.jpg">
+                        <label>📷 صورة الدواء (اختر من جهازك)</label>
+                        <input type="file" id="newMedicineImageFile" accept="image/*" style="padding: 8px;">
+                        <div class="image-preview" id="imagePreview"></div>
                     </div>
-                    <button class="btn btn-primary" id="addMedicineBtn" style="width:100%;">إضافة الدواء</button>
+                    <button class="btn btn-primary" id="addMedicineBtn" style="width:100%;">➕ إضافة الدواء</button>
                 </div>
             </div>
         </div>
@@ -853,6 +859,26 @@
         let secretClickCount = 0;
         let secretTimeout = null;
         let currentOrderFilter = "";
+        let selectedImageBase64 = null; // لتخزين الصورة المختارة
+
+        // معاينة الصورة عند اختيارها
+        function setupImagePreview() {
+            const fileInput = document.getElementById("newMedicineImageFile");
+            if (fileInput) {
+                fileInput.addEventListener("change", function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            selectedImageBase64 = event.target.result;
+                            const previewDiv = document.getElementById("imagePreview");
+                            previewDiv.innerHTML = `<img src="${selectedImageBase64}" alt="معاينة الدواء">`;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        }
 
         function displayMedicines(filter = "") {
             const grid = document.getElementById("medicinesGrid");
@@ -929,6 +955,7 @@
             document.getElementById("totalVolunteers") && (document.getElementById("totalVolunteers").textContent = stats.totalVolunteers);
         }
 
+        // لوحة التحكم المخفية
         document.getElementById("secretLogoBtn")?.addEventListener("click", () => {
             secretClickCount++;
             if (secretTimeout) clearTimeout(secretTimeout);
@@ -993,23 +1020,43 @@
             updateStats();
         }
 
+        // إضافة دواء جديد مع صورة من المعرض
         function addMedicine() {
             const name = document.getElementById("newMedicineName")?.value;
             const quantity = parseInt(document.getElementById("newMedicineQuantity")?.value);
             const expiry = document.getElementById("newMedicineExpiry")?.value;
             const requiresPrescription = document.getElementById("newMedicinePrescription")?.value === "1";
-            const image = document.getElementById("newMedicineImage")?.value || "https://via.placeholder.com/150?text=Medicine";
+            
+            // استخدام الصورة المرفوعة أو صورة افتراضية
+            let imageUrl = selectedImageBase64;
+            if (!imageUrl) {
+                imageUrl = "https://via.placeholder.com/150?text=Medicine";
+            }
+            
             if (name && quantity) {
                 const newId = Math.max(...medicines.map(m => m.id), 0) + 1;
-                medicines.push({ id: newId, name, quantity, expiry, requiresPrescription, image, description: "وصف الدواء" });
+                medicines.push({
+                    id: newId, 
+                    name, 
+                    quantity, 
+                    expiry,
+                    requiresPrescription, 
+                    image: imageUrl,
+                    description: "وصف الدواء"
+                });
                 displayMedicines();
                 displayOrderMedicines(currentOrderFilter);
                 loadAdminData();
                 updateStats();
+                
+                // تفريغ الحقول
                 document.getElementById("newMedicineName").value = "";
                 document.getElementById("newMedicineQuantity").value = "";
                 document.getElementById("newMedicineExpiry").value = "";
-                document.getElementById("newMedicineImage").value = "";
+                document.getElementById("newMedicineImageFile").value = "";
+                document.getElementById("imagePreview").innerHTML = "";
+                selectedImageBase64 = null;
+                
                 alert("✅ تم إضافة الدواء بنجاح!");
             } else {
                 alert("الرجاء إدخال اسم الدواء والكمية");
@@ -1101,12 +1148,9 @@
             });
         }
 
-        // ========== تغيير اللوقو - غيري "logo.jpg" إلى اسم صورتك ==========
         function changeLogo() {
             const logoImg = document.getElementById("logoImage");
             if (logoImg) {
-                // ★★★ غيري "logo.jpg" إلى اسم ملف صورتك ★★★
-                // مثال: إذا اسم صورتك "my-logo.png" اكتبي "my-logo.png"
                 logoImg.src = "photo_5980807441211395032_y.jpg";
             }
         }
@@ -1120,6 +1164,7 @@
             setupNavigation();
             setupOrderForm();
             setupAdminButtons();
+            setupImagePreview();
             changeLogo();
             showPage('home');
         });
